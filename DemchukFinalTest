@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>FinalTest</title>
+	<script type="text/javascript">
+
+		var positions = [
+		"Junior QA engineer",
+		"Middle QA engineer",
+		"Porduct owner",
+		"Senior QA engineer",
+		"Middle developer",
+		"Project manager",
+		"Senior developer",
+		"Junior developer"
+		];
+
+		var names = [];
+		getNames();
+		function getNames() {
+			for (var i = 0; i < positions.length; i++) {
+				var userInput = prompt("Введите имя на должность " + positions[i]);
+				if (userInput) {
+					names.push(userInput);
+				} else {
+					names.push("no-name");
+				}
+			}
+		}
+		console.log("Имена сотрудников: " + names);
+
+		var team = createTeam(positions, names);
+		function createTeam(position, name) {
+			var team = [];
+			for (var i = 0; i < names.length; i++) {
+				var obj = { name: "", position: "" };
+				obj.name = names[i];
+				obj.position = position[i];
+				team.push(obj);
+			}
+			return team;
+		}
+		console.log(team); 
+
+		setSalaries();	
+		function getSalary(position) {
+			if (position.indexOf("Junior") >= 0)
+				return Math.floor(Math.random() * (1000 - 500)) + 500;
+			if (position.indexOf("Middle") >= 0)
+				return Math.floor(Math.random() * (2000 - 1500)) + 1500;
+			if (position.indexOf("Senior") >= 0)
+				return Math.floor(Math.random() * (3000 - 2500)) + 2500;
+			return Math.floor(Math.random() * (4500 - 4000)) + 4000;
+		}
+
+		function setSalaries() {
+			for (var i = 0; i < team.length; i++) {
+				team[i].salary = getSalary(team[i].position);
+			}
+		}
+		console.log(team);
+
+		setSelfIntroducing();
+		a = prompt("Введите номер сотрудника (от 0 до 7): ")
+		team[a].tellAboutYourSelf();
+		function setSelfIntroducing() {
+			for (var i = 0; i < team.length; i++) {
+				team[i].tellAboutYourSelf = function() {
+					console.log("Меня зовут " +	this.name +	" и я - " + this.position +	". Я зарабатываю " + this.salary + "$.");
+				}
+			}
+		}
+
+	</script>
+
+</head>
+<body>
+
+
+
+</body>
+</html>
